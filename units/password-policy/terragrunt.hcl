@@ -1,5 +1,5 @@
 terraform {
-  source = "git::https://github.com/plus3it/terraform-aws-tardigrade-iam-account//.?ref=v3.0.0"
+  source = "git::https://github.com/plus3it/terraform-aws-tardigrade-iam-account//.?ref=3.0.0"
 }
 
 include "root" {
