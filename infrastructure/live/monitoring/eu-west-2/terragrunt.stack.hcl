@@ -1,3 +1,7 @@
+locals {
+  account_id = "123456789012"
+}
+
 unit "budget" {
   source = "../../../unit/budget"
   path   = "budget"
