@@ -10,6 +10,14 @@ locals {
   project    = "example"
   env        = "production"
   aws_id     = "123456789012"
+
+  skip = {
+    vpc          = false
+    kms          = false
+    eks_ebs_irsa = false
+    eks          = false
+    helm         = false
+  }
 }
 
 unit "vpc" {
@@ -25,6 +33,8 @@ unit "vpc" {
     vpc_enable_dns_support     = true
     region                     = "eu-west-2"
     availability_zone          = ["eu-west-2a", "eu-west-2b", "eu-west-2c"]
+
+    skip = locals.skip.vpc
   }
 }
 
@@ -37,6 +47,8 @@ unit "kms" {
     kms_customer_master_key_spec = "SYMMETRIC_DEFAULT"
     kms_key_usage                = "ENCRYPT_DECRYPT"
     kms_key_administrators       = ["${local.iam_role}"]
+
+    skip = local.skip.kms
   }
 }
 
@@ -47,14 +59,11 @@ unit "eks-ebs-irsa" {
   values = {
     ebs_csi_irsa_role_name                     = "${local.project}-ebs-csi-role"
     ebs_csi_irsa_attach_ebs_csi_policy         = true
+    ebs_csi_irsa_namespace_service_accounts    = ["kube-system:ebs-csi-controller-sa"]
     ebs_csi_irsa_ebs_csi_kms_cmk_ids           = []
     ebs_csi_irsa_external_secrets_kms_key_arns = ["arn:aws:kms:*:*:key/*"]
-    oidc_providers = {
-      main = {
-        # provider_arn                            = dependency.eks.outputs.oidc_provider_arn
-        ebs_csi_irsa_namespace_service_accounts = ["kube-system:ebs-csi-controller-sa"]
-      }
-    }
+
+    skip = local.skip.eks_ebs_irsa
   }
 }
 
@@ -105,6 +114,8 @@ unit "eks" {
         }
       }
     }
+
+    skip = local.skip.eks
   }
 }
 
@@ -154,6 +165,8 @@ unit "helm" {
       ]
       tags = "${local.tags}"
     }
+
+    skip = local.skip.helm
   }
 }
 
