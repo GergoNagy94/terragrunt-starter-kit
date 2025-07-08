@@ -21,7 +21,7 @@ locals {
 }
 
 unit "vpc" {
-  source = "../../../unit/vpc"
+  source = "../../../../units/vpc"
   path   = "vpc"
 
   values = {
@@ -39,7 +39,7 @@ unit "vpc" {
 }
 
 unit "kms" {
-  source = "../../../unit/kms"
+  source = "../../../../units/kms"
   path   = "kms"
 
   values = {
@@ -52,7 +52,7 @@ unit "kms" {
 }
 
 unit "eks-ebs-irsa" {
-  source = "../../../unit/eks-ebs-irsa"
+  source = "../../../../units/eks-ebs-irsa"
   path   = "eks-ebs-irsa"
 
   values = {
@@ -69,7 +69,7 @@ unit "eks-ebs-irsa" {
 }
 
 unit "eks" {
-  source = "../../../unit/eks"
+  source = "../../../../units/eks"
   path   = "eks"
 
   values = {
@@ -123,7 +123,7 @@ unit "eks" {
 }
 
 unit "helm" {
-  source = "../../../unit/helm"
+  source = "../../../../units/helm"
   path   = "helm"
 
   values = {
