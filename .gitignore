@@ -8,8 +8,10 @@ vendor
 *.tfstate.backup
 *.out
 .terragrunt-cache
+.terragrunt-stack
 .bundle
 .ruby-version
 .terraform.lock.hcl
-terragrunt
-.terragrunt.stack
+.DS_Store
+.env
+*bootstrap/
