@@ -1,0 +1,78 @@
+# Generated: 2025-07-08 10:20:02 CET
+# Repository: terragrunt-starter-kit
+# Environment: units
+# Report Type: Full
+
+terraform_modules:
+  - unit_name: "password-policy"
+    module_name: "plus3it/terraform-aws-tardigrade-iam-account//."
+    module_type: "git"
+    current_version: "v3.0.0"
+    latest_version: "3.0.0"
+    status: "outdated"
+    needs_update: true
+
+  - unit_name: "kms"
+    module_name: "https:"
+    module_type: "git"
+    current_version: "v3.1.1"
+    latest_version: "v3.1.1"
+    status: "up-to-date"
+    needs_update: false
+
+  - unit_name: "eks-ebs-irsa"
+    module_name: "terraform-aws-modules/terraform-aws-iam//modules/iam-role-for-service-accounts-eks"
+    module_type: "git"
+    current_version: "v5.57.0"
+    latest_version: "v5.59.0"
+    status: "outdated"
+    needs_update: true
+
+  - unit_name: "organizational-units"
+    module_name: "blackbird-cloud/terraform-aws-organization//modules/accounts/."
+    module_type: "git"
+    current_version: "v3.1.0"
+    latest_version: "v3.1.0"
+    status: "up-to-date"
+    needs_update: false
+
+  - unit_name: "eks"
+    module_name: "https:"
+    module_type: "git"
+    current_version: "v20.37.1"
+    latest_version: "v20.37.1"
+    status: "up-to-date"
+    needs_update: false
+
+  - unit_name: "accounts"
+    module_name: "blackbird-cloud/terraform-aws-organization//modules/accounts"
+    module_type: "git"
+    current_version: "v3.0.5"
+    latest_version: "v3.1.0"
+    status: "outdated"
+    needs_update: true
+
+  - unit_name: "helm-release"
+    module_name: "helm-releases"
+    module_type: "local"
+    current_version: "local"
+    latest_version: "local"
+    status: "up-to-date"
+    needs_update: false
+
+  - unit_name: "vpc"
+    module_name: "https:"
+    module_type: "git"
+    current_version: "v6.0.1"
+    latest_version: "v6.0.1"
+    status: "up-to-date"
+    needs_update: false
+
+  - unit_name: "budget"
+    module_name: "ganexcloud/terraform-aws-budget//."
+    module_type: "git"
+    current_version: "v2.0.0"
+    latest_version: "v2.0.0"
+    status: "up-to-date"
+    needs_update: false
+
