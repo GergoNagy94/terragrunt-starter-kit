@@ -14,6 +14,7 @@ locals {
     environment     = local.env
     project         = local.project
     project_version = local.project_version
+    name            = "${local.env}-${local.project}"
   }
 
   s3_state_region = "eu-central-1"
