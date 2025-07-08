@@ -10,6 +10,7 @@ locals {
   project    = "example"
   env        = "development"
   aws_id     = "123456789012"
+  iam_role   = "example-role"
 
   skip = {
     vpc          = false
@@ -34,7 +35,7 @@ unit "vpc" {
     region                     = "eu-west-2"
     availability_zone          = ["eu-west-2a", "eu-west-2b", "eu-west-2c"]
 
-    skip = locals.skip.vpc
+    skip = local.skip.vpc
   }
 }
 
