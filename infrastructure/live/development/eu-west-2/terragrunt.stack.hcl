@@ -59,14 +59,9 @@ unit "eks-ebs-irsa" {
   values = {
     ebs_csi_irsa_role_name                     = "${local.project}-ebs-csi-role"
     ebs_csi_irsa_attach_ebs_csi_policy         = true
+    ebs_csi_irsa_namespace_service_accounts    = ["kube-system:ebs-csi-controller-sa"]
     ebs_csi_irsa_ebs_csi_kms_cmk_ids           = []
     ebs_csi_irsa_external_secrets_kms_key_arns = ["arn:aws:kms:*:*:key/*"]
-    oidc_providers = {
-      main = {
-        # provider_arn                            = dependency.eks.outputs.oidc_provider_arn
-        ebs_csi_irsa_namespace_service_accounts = ["kube-system:ebs-csi-controller-sa"]
-      }
-    }
 
     skip = local.skip.eks_ebs_irsa
   }
