@@ -5,6 +5,39 @@ locals {
     Project     = "example"
     ManagedBy   = "Terragrunt"
   }
+
+  account_id = "123456789012"
+  project    = "example"
+  env        = "development"
+  aws_id     = "123456789012"
+}
+
+unit "vpc" {
+  source = "../../../unit/vpc"
+  path   = "vpc"
+
+  values = {
+    vpc_cidr                   = "10.0.0.0/16"
+    vpc_nat_gateway            = true
+    vpc_single_nat_gateway     = true
+    vpc_create_egress_only_igw = true
+    vpc_enable_dns_hostnames   = true
+    vpc_enable_dns_support     = true
+    region                     = "eu-west-2"
+    availability_zone          = ["eu-west-2a", "eu-west-2b", "eu-west-2c"]
+  }
+}
+
+
+unit "kms" {
+  source = "../../../unit/kms"
+  path   = "kms"
+
+  values = {
+    kms_customer_master_key_spec = "SYMMETRIC_DEFAULT"
+    kms_key_usage                = "ENCRYPT_DECRYPT"
+    kms_key_administrators       = ["${local.iam_role}"]
+  }
 }
 
 unit "eks-ebs-irsa" {
@@ -72,33 +105,6 @@ unit "eks" {
         }
       }
     }
-  }
-}
-
-unit "kms" {
-  source = "../../../unit/kms"
-  path   = "kms"
-
-  values = {
-    kms_customer_master_key_spec = "SYMMETRIC_DEFAULT"
-    kms_key_usage                = "ENCRYPT_DECRYPT"
-    kms_key_administrators       = ["${local.iam_role}"]
-  }
-}
-
-unit "vpc" {
-  source = "../../../unit/vpc"
-  path   = "vpc"
-
-  values = {
-    vpc_cidr                   = "10.0.0.0/16"
-    vpc_nat_gateway            = true
-    vpc_single_nat_gateway     = true
-    vpc_create_egress_only_igw = true
-    vpc_enable_dns_hostnames   = true
-    vpc_enable_dns_support     = true
-    region                     = "eu-west-2"
-    availability_zone          = ["eu-west-2a", "eu-west-2b", "eu-west-2c"]
   }
 }
 
