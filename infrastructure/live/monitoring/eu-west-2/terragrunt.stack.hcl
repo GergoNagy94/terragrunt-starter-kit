@@ -3,7 +3,7 @@ locals {
 }
 
 unit "budget" {
-  source = "../../../unit/budget"
+  source = "../../../../units/budget"
   path   = "budget"
 
   values = {
@@ -44,7 +44,7 @@ unit "budget" {
 }
 
 unit "password_policy" {
-  source = "../../../unit/password-policy"
+  source = "../../../../units/password-policy"
   path   = "password-policy"
 
   values = {

@@ -3,7 +3,7 @@ locals {
 }
 
 unit "accounts" {
-  source = "../../../unit/accounts"
+  source = "../../../../units/accounts"
   path   = "accounts"
 
   values = {
@@ -56,7 +56,7 @@ unit "accounts" {
 }
 
 unit "organizational-units" {
-  source = "../../../unit/organizational-units"
+  source = "../../../../units/organizational-units"
   path   = "organizational-units"
 
   values = {

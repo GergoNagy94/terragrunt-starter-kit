@@ -124,7 +124,7 @@ unit "eks" {
 }
 
 unit "helm" {
-  source = "../../../../units/helm"
+  source = "../../../../units/helm-release"
   path   = "helm"
 
   values = {
