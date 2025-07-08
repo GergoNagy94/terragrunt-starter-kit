@@ -1,4 +1,4 @@
-# Generated: 2025-07-08 10:20:02 CET
+# Generated: 2025-07-08 12:33:08 CET
 # Repository: terragrunt-starter-kit
 # Environment: units
 # Report Type: Full
@@ -7,10 +7,10 @@ terraform_modules:
   - unit_name: "password-policy"
     module_name: "plus3it/terraform-aws-tardigrade-iam-account//."
     module_type: "git"
-    current_version: "v3.0.0"
+    current_version: "3.0.0"
     latest_version: "3.0.0"
-    status: "outdated"
-    needs_update: true
+    status: "up-to-date"
+    needs_update: false
 
   - unit_name: "kms"
     module_name: "https:"
