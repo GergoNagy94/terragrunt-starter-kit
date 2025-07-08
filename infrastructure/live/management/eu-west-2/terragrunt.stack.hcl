@@ -24,7 +24,7 @@ unit "accounts" {
       }
     }
     contacts = {
-      org_primary_contact = = {
+      org_primary_contact = {
         address_line_1  = "110 Maplewood Avenue, Apartment 5B"
         city            = "Springfield"
         country_code    = "USA"

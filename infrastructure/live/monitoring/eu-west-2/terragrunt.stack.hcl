@@ -44,8 +44,8 @@ unit "budget" {
 }
 
 unit "password_policy" {
-  source = "../../../unit/password_policy"
-  path   = "password_policy"
+  source = "../../../unit/password-policy"
+  path   = "password-policy"
 
   values = {
     create_accessanalyzer = false
