@@ -3,11 +3,12 @@ locals {
 }
 
 unit "accounts" {
-  source                    = "../../../unit/accounts"
-  path                      = "accounts"
-  organizational_units_path = "../organizational-units"
+  source = "../../../unit/accounts"
+  path   = "accounts"
 
   values = {
+    organizational_units_path = "../organizational-units"
+
     accounts = {
       "production" = {
         email             = "production@example.com"

@@ -38,7 +38,6 @@ unit "vpc" {
   }
 }
 
-
 unit "kms" {
   source = "../../../unit/kms"
   path   = "kms"
@@ -57,6 +56,8 @@ unit "eks-ebs-irsa" {
   path   = "eks-ebs-irsa"
 
   values = {
+    eks_path = "../eks"
+
     ebs_csi_irsa_role_name                     = "${local.project}-ebs-csi-role"
     ebs_csi_irsa_attach_ebs_csi_policy         = true
     ebs_csi_irsa_namespace_service_accounts    = ["kube-system:ebs-csi-controller-sa"]
@@ -68,11 +69,13 @@ unit "eks-ebs-irsa" {
 }
 
 unit "eks" {
-  source   = "../../../unit/eks"
-  path     = "eks"
-  vpc_path = "../vpc"
+  source = "../../../unit/eks"
+  path   = "eks"
 
   values = {
+    vpc_path = "../vpc"
+    kms_path = "../kms"
+
     # EKS variables
     eks_cluster_name                    = "${local.project}-${local.env}-cluster"
     eks_cluster_version                 = "1.30"
@@ -123,24 +126,27 @@ unit "helm" {
   source = "../../../unit/helm"
   path   = "helm"
 
-  helm_releases = {
-    reloader = {
-      repository           = "https://stakater.github.io/stakater-charts"
-      chart                = "reloader"
-      chart_version        = "1.0.62"
-      create_namespace     = true
-      kubernetes_namespace = "infra"
-      tags                 = "${local.tags}"
-    }
+  values = {
+    eks_path = "../eks"
 
-    fluentbit = {
-      repository           = "https://fluent.github.io/helm-charts"
-      chart                = "fluent-bit"
-      chart_version        = "0.34.2"
-      kubernetes_namespace = "kube-system"
+    helm_releases = {
+      reloader = {
+        repository           = "https://stakater.github.io/stakater-charts"
+        chart                = "reloader"
+        chart_version        = "1.0.62"
+        create_namespace     = true
+        kubernetes_namespace = "infra"
+        tags                 = "${local.tags}"
+      }
 
-      values = [
-        <<EOF
+      fluentbit = {
+        repository           = "https://fluent.github.io/helm-charts"
+        chart                = "fluent-bit"
+        chart_version        = "0.34.2"
+        kubernetes_namespace = "kube-system"
+
+        values = [
+          <<EOF
                 serviceAccount:
                 create: true
                 annotations: 
@@ -162,11 +168,12 @@ unit "helm" {
                         Index my_index
                         Type my_type
                 EOF   
-      ]
-      tags = "${local.tags}"
-    }
+        ]
+        tags = "${local.tags}"
+      }
 
-    skip = local.skip.helm
+      skip = local.skip.helm
+    }
   }
 }
 
